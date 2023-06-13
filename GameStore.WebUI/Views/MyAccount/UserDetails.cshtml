@@ -1,0 +1,51 @@
+﻿@model GameStore.WebUI.Models.User
+
+<h2 class="text-center">Мои данные</h2>
+<label for="name">Логин: </label>
+		<input readonly="" style="outline: none;border:0px" placeholder="@Model.Email" id="name" />
+		<br />
+		<label for="age">Возраст: </label>
+		<input readonly="" style="outline: none;border:0px" placeholder="@Model.Age" id="age" /><br />
+		<div class="password">
+			<label for="password-input">Мой пароль: </label>
+			<input type="password" readonly="" id="password-input" placeholder="123" name="password" value="@Model.Password">
+			<a href="#" class="password-control" onclick="return show_hide_password(this);"></a>
+		</div>
+
+<style type="text/css">
+#password-input {
+	width: 100%;
+	padding: 10px 0;
+	height: 30px;
+	line-height: 40px;
+	text-indent: 10px;
+	border-radius: 5px;
+	border: 1px solid #999;
+	font-size: 18px;
+	outline:none;
+	border:0px;
+}
+.password-control {
+	top: 11px;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(https://snipp.ru/demo/495/view.svg) 0 0 no-repeat;
+}
+.password-control.view {
+	background: url(https://snipp.ru/demo/495/no-view.svg) 0 0 no-repeat;
+}
+</style>
+<script>
+    function show_hide_password(target) {
+        var input = document.getElementById('password-input');
+        if (input.getAttribute('type') == 'password') {
+            target.classList.add('view');
+            input.setAttribute('type', 'text');
+        } else {
+            target.classList.remove('view');
+            input.setAttribute('type', 'password');
+        }
+        return false;
+    }
+</script>

@@ -1,0 +1,26 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Index</title>
+</head>
+<body>
+<div>
+	@if (User.Identity.IsAuthenticated)
+	{
+		@Html.ActionLink("logout...", "Logoff")
+	}
+	else
+	{	
+		@Html.ActionLink("login", "Login")
+		@Html.Label(" | ");
+		@Html.ActionLink("register", "Register")
+	}
+</div>
+</body>
+</html>

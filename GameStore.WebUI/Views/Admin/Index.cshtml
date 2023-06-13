@@ -1,0 +1,59 @@
+﻿@model IEnumerable<GameStore.Domain.Entities.Game>
+
+@{
+    ViewBag.Title = "Админ панель: редактирование товара";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    HtmlHelper.ClientValidationEnabled = false;
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Список товаров</h3>
+    </div>
+	<div class="panel-body">
+		<table>
+			<thead>
+			<h2>Export Goods</h2>
+			</thead>
+			<tr>
+				<td>
+					<a href="@Url.Action("ExportToExcel", "Admin")">Export to Excel</a><br/>
+					<a href="@Url.Action("ExportToCsv", "Admin")">Export to CSV</a><br/>
+					<a href="@Url.Action("ExportToWord", "Admin")">Export to World</a><br/>
+
+
+				</td>
+			</tr>
+		</table>
+		<table class="table table-striped table-condensed table-bordered">
+			<tr>
+				<th class="text-right">ID</th>
+				<th>Название</th>
+				<th class="text-right">Цена</th>
+				<th class="text-center">Действия</th>
+			</tr>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td class="text-right">@item.GameId</td>
+					<td>@Html.ActionLink(item.Name, "Edit", new { item.GameId })</td>
+					<td class="text-right">@item.Price.ToString("# руб")</td>
+					<td class="text-center">
+						@using (Html.BeginForm("Delete", "Admin"))
+						{
+							@Html.Hidden("GameId", item.GameId)
+							<input type="submit"
+							       class="btn btn-default btn-xs"
+							       value="Удалить"/>
+						}
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+    <div class="panel-footer">
+        @Html.ActionLink("Добавить товар", "Create", null,
+            new { @class = "btn btn-default" })
+    </div>
+</div>

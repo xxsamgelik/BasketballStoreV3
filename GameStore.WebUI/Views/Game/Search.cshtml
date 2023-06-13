@@ -1,0 +1,28 @@
+﻿@model IEnumerable<GameStore.Domain.Entities.Game>
+
+<h2>Результаты поиска</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Категория</th>
+            <th>Цена</th>
+        </tr>
+        @foreach (var game in Model)
+        {
+            <tr>
+                <td>@game.Name</td>
+                <td>@game.Description</td>
+                <td>@game.Category</td>
+                <td>@game.Price</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>@ViewBag.Message</p>
+}
