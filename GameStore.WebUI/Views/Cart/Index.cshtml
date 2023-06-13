@@ -43,25 +43,34 @@
 <table id="cartTable" class="table">
     <!-- ... -->
     <tbody>
-        @foreach (var line in Model.Cart.Lines)
-        {
-            <tr>
-                <td class="text-center">@line.Quantity</td>
-                <td class="text-left">@line.Game.Name</td>
-                <td class="text-right">@line.Game.Price.ToString("# руб")</td>
-                <td class="text-right">
-                    @((line.Quantity * line.Game.Price).ToString("# руб"))
-                </td>
-                <td>
-                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
-                    {
-                        @Html.Hidden("GameId", line.Game.GameId)
-                        @Html.HiddenFor(x => x.ReturnUrl)
-                        <input class="btn btn-sm btn-warning" type="submit" value="Удалить" />
-                    }
-                </td>
-            </tr>
-        }
+    @foreach (var line in Model.Cart.Lines)
+    {
+	    <tr>
+		    <td class="text-center">
+			    @using (Html.BeginForm("AddToCart", "Cart"))
+			    {
+				    @Html.Hidden("gameId", line.Game.GameId)
+				    @Html.HiddenFor(x => x.ReturnUrl)
+				    <input type="number" name="quantity" value="@line.Quantity" min="1" />
+				    <input class="btn btn-sm btn-primary" type="submit" value="Изменить" />
+			    }
+		    </td>
+		    <td class="text-left">@line.Game.Name</td>
+		    <td class="text-right">@line.Game.Price.ToString("# руб")</td>
+		    <td class="text-right">
+			    @((line.Quantity * line.Game.Price).ToString("# руб"))
+		    </td>
+		    <td>
+			    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+			    {
+				    @Html.Hidden("GameId", line.Game.GameId)
+				    @Html.HiddenFor(x => x.ReturnUrl)
+				    <input class="btn btn-sm btn-warning" type="submit" value="Удалить" />
+			    }
+		    </td>
+	    </tr>
+    }
+
     </tbody>
     </table>
 <div class="text-center">

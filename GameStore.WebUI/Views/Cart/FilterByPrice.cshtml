@@ -1,0 +1,28 @@
+﻿@model IEnumerable<GameStore.Domain.Entities.Game>
+
+<h2>Фильтрация товаров</h2>
+
+@if (Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model)
+            {
+                <tr>
+                    <td>@game.Name</td>
+                    <td>@game.Price.ToString("# руб")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Товар не найден.</p>
+}

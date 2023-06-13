@@ -31,17 +31,21 @@ namespace GameStore.WebUI.Controllers
             });
         }
 
-        public RedirectToRouteResult AddToCart(Cart cart, int gameId, string returnUrl)
+        public RedirectToRouteResult AddToCart(Cart cart, int gameId, int? quantity, string returnUrl)
         {
-            Game game = repository.Games
-                .FirstOrDefault(g => g.GameId == gameId);
+            // Проверяем, что параметр quantity не является null
+            int quantityValue = quantity ?? 1;
+
+            Game game = repository.Games.FirstOrDefault(g => g.GameId == gameId);
 
             if (game != null)
             {
-                cart.AddItem(game, 1);
+                cart.AddItem(game, quantityValue);
             }
+
             return RedirectToAction("Index", new { returnUrl });
         }
+
 
         public RedirectToRouteResult RemoveFromCart(Cart cart, int gameId, string returnUrl)
         {
@@ -77,5 +81,20 @@ namespace GameStore.WebUI.Controllers
                 return View(shippingDetails);
             }
         }
+
+        public ViewResult FilterByPrice(decimal minPrice, decimal maxPrice)
+        {
+            IEnumerable<Game> games = repository.GetGamesByPrice(minPrice, maxPrice);
+
+            // Вернуть представление с отфильтрованными играми
+            return View(games);
+        }
+
+
+
+
+
+
     }
+
 }

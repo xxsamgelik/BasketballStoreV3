@@ -68,5 +68,9 @@ namespace GameStore.Domain.Concrete
             }
             return dbEntry;
         }
+        public IEnumerable<Game> GetGamesByPrice(decimal minPrice, decimal maxPrice)
+        {
+            return context.Games.Where(g => g.Price >= minPrice && g.Price <= maxPrice);
+        }
     }
 }

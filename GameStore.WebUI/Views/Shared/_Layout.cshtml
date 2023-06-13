@@ -35,6 +35,61 @@
 		</form>
 	</div>
 }
+@using (Html.BeginForm("FilterByPrice", "Cart", FormMethod.Get, new { @class = "filter-form" }))
+{
+	<div class="cont">
+		<div class="filter-input">
+			<label for="minPrice">Min Price:</label>
+			<input type="number" id="minPrice" name="minPrice" />
+            	<input type="submit" value="Filter" class="filter-button" />
+
+		</div>
+
+		<div class="filter-input">
+			<label for="maxPrice">Max Price:</label>
+			<input type="number" id="maxPrice" name="maxPrice" />
+		</div>
+	</div>
+
+}
+<style>
+    .cont
+    {
+        margin-left:60px;
+    }
+    .filter-input {
+        margin-bottom: 10px;
+    }
+
+        .filter-input label {
+            display: inline-block;
+            width: 80px;
+            font-weight: bold;
+        }
+
+        .filter-input input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+    .filter-button {
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+
+        cursor: pointer;
+    }
+
+        .filter-button:hover {
+            background-color: #0056b3;
+        }
+
+
+
+</style>
+
 <div class="visible-xs">
 	@Html.Action("Menu", "Nav", new { horizontalNav = true })
 </div>

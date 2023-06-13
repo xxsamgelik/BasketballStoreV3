@@ -237,6 +237,7 @@
     <Content Include="Views\MyAccount\UserDetails.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Game\Search.cshtml" />
+    <Content Include="Views\Cart\FilterByPrice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

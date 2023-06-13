@@ -26,8 +26,9 @@ namespace GameStore.Domain.Entities
             }
             else
             {
-                line.Quantity += quantity;
+                line.Quantity = quantity;
             }
+
         }
 
         public void RemoveLine(Game game)
@@ -49,6 +50,11 @@ namespace GameStore.Domain.Entities
         {
             get { return lineCollection; }
         }
+
+
+
+
+
     }
 
     public class CartLine
