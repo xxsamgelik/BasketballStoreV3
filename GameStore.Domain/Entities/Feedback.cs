@@ -8,7 +8,7 @@ namespace GameStore.Domain.Entities
 {
     public class Feedback
     {
-        public string Message { get; set; }
         public int Id { get; set; }
+        public string Message { get; set; }
     }
 }

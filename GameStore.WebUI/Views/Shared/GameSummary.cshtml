@@ -1,4 +1,5 @@
-﻿@model GameStore.Domain.Entities.Game
+﻿@using Ninject.Activation
+@model GameStore.Domain.Entities.Game
 
 <div class="well">
 	@if (Model.ImageData != null)
@@ -20,6 +21,7 @@
 			@Html.HiddenFor(x => x.GameId)
 			@Html.Hidden("returnUrl", Request.Url.PathAndQuery)
 			<input type="submit" class="btn btn-success" value="Добавить в корзину" />
+
 		</div>
 	}
 	<span class="lead">@Model.Description</span>

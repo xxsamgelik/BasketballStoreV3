@@ -1,0 +1,15 @@
+﻿@model GameStore.Domain.Entities.Game
+
+@{
+    ViewBag.Title = "Удалить из избранного";
+}
+
+<h2>Удалить из избранного</h2>
+
+<div>
+    <h4>@Model.Name</h4>
+    <p>@Model.Description</p>
+    <p>
+        <a href="@Url.Action("AddToFavorites", "Game", new { gameId = Model.GameId })" class="btn btn-primary" role="button">Добавить в избранное</a>
+    </p>
+</div>

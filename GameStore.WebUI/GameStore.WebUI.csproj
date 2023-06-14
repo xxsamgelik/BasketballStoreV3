@@ -610,6 +610,9 @@
     <Content Include="Views\Cart\_GameList.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Contact\ThankYou.cshtml" />
+    <Content Include="Views\Game\FavoriteGames.cshtml" />
+    <Content Include="Views\Game\AddToFavorites.cshtml" />
+    <Content Include="Views\Game\RemoveFromFavorites.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

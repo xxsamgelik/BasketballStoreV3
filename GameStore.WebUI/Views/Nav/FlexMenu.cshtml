@@ -13,6 +13,12 @@
 			@class = horizontal ? "btn btn-default btn-sm" :
 				"btn btn-block btn-default btn-lg"
 		})
+	@Html.ActionLink("Контакты", "Index", "Contact", null,
+		new
+		{
+			@class = horizontal ? "btn btn-default btn-sm" :
+				"btn btn-block btn-default btn-lg"
+		})
 
 	@foreach (var link in Model)
     {

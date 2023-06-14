@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GameStore.Domain.Entities.Game>
+
+@{
+    ViewBag.Title = "Избранные игры";
+}
+
+<h2>Избранные игры</h2>
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var game in Model)
+        {
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="@Url.Action("GetImage", "Game", new { gameId = game.GameId })" alt="@game.Name" class="img-responsive" />
+                    <div class="caption">
+                        <h4>@game.Name</h4> 
+                        <p>@game.Description</p>
+                        <p>
+                            <a href="@Url.Action("Details", "Game", new { gameId = game.GameId })" class="btn btn-default" role="button">Подробнее</a>
+                            <a href="@Url.Action("RemoveFromFavorites", "Game", new { gameId = game.GameId })" class="btn btn-danger" role="button">Удалить из избранного</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>У вас нет избранных игр.</p>
+}
