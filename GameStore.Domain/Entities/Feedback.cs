@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace GameStore.WebUI.Models
+namespace GameStore.Domain.Entities
 {
-    public class FeedbackFormModel
+    public class Feedback
     {
         public string Message { get; set; }
         public int Id { get; set; }
-
     }
-
-}   
+}

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GameStore.Domain.Concrete;
+using GameStore.Domain.Entities;
 using GameStore.WebUI.Models;
 
 namespace GameStore.WebUI.Controllers
@@ -16,19 +18,33 @@ namespace GameStore.WebUI.Controllers
         }
 
         // POST: /Contact/SubmitForm
-        [HttpPost]
-        public ActionResult SubmitForm(FeedbackFormModel model)
+      [HttpPost]
+public ActionResult SubmitForm(FeedbackFormModel model)
+{
+    if (ModelState.IsValid)
+    {
+        using (var dbContext = new EFDbContext())
         {
-            if (ModelState.IsValid)
+            // Создаем объект Feedback и заполняем его данными из модели
+            var feedback = new Feedback
             {
-                // Выполните действия по обработке формы обратной связи, например, отправку письма или сохранение в базу данных
+                Message = model.Message
+            };
 
-                return RedirectToAction("ThankYou");
-            }
+            // Добавляем объект Feedback в контекст базы данных
+            dbContext.Feedbacks.Add(feedback);
 
-            // Если модель данных не прошла валидацию, верните представление с ошибками
-            return View("Index", model);
+            // Сохраняем изменения в базе данных
+            dbContext.SaveChanges();
         }
+
+        return RedirectToAction("ThankYou");
+    }
+
+    return View("Index", model);
+}
+
+
 
         // GET: /Contact/ThankYou
         public ActionResult ThankYou()
