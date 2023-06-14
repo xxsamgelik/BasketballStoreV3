@@ -21,28 +21,55 @@ namespace GameStore.WebUI.Controllers
             repository = repo;
         }
 
-        public ViewResult List(string category, int page = 1)
+        public ViewResult List(string category, string sortBy, int page = 1, string searchString = null)
         {
+            var query = repository.Games;
+
+            // Применение фильтрации по категории
+            if (!string.IsNullOrEmpty(category))
+            {
+                query = query.Where(p => p.Category == category);
+            }
+
+            // Применение поиска
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(p => p.Name.Contains(searchString));
+            }
+
+            // Применение сортировки по имени товара по первой букве
+            switch (sortBy)
+            {
+                case "name_asc":
+                    query = query.OrderBy(p => p.Name);
+                    break;
+                case "name_desc":
+                    query = query.OrderByDescending(p => p.Name);
+                    break;
+                default:
+                    query = query.OrderBy(game => game.GameId);
+                    break;
+            }
+
+            int totalItems = query.Count();
 
             GamesListViewModel model = new GamesListViewModel
             {
-                Games = repository.Games
-                    .Where(p => category == null || p.Category == category)
-                    .OrderBy(game => game.GameId)
+                Games = query
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = category == null
-                        ? repository.Games.Count()
-                        : repository.Games.Where(game => game.Category == category).Count()
+                    TotalItems = totalItems
                 },
-                CurrentCategory = category
+                CurrentCategory = category,
             };
+
             return View(model);
         }
+
 
         public FileContentResult GetImage(int gameId)
         {

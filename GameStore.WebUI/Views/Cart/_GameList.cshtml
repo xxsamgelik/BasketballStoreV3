@@ -1,0 +1,44 @@
+﻿@foreach (var game in Model)
+{
+	<div class="game-item">
+		<h3>@game.Name</h3>
+		<p>Цена: @game.Price</p>
+        @RenderBody();
+	</div>
+}
+<script>
+$(document).ready(function() {
+    $('#search-form').submit(function(event) {
+        event.preventDefault();
+        var searchTerm = $('#search-input').val();
+        searchGames(searchTerm);
+    });
+
+    $('#sort-select').change(function() {
+        var sortBy = $(this).val();
+        sortGames(sortBy);
+    });
+
+    function searchGames(searchTerm) {
+        $.ajax({
+            url: '@Url.Action("Search", "Cart")',
+            type: 'POST',
+            data: { searchTerm: searchTerm },
+            success: function(data) {
+                $('#game-list').html(data);
+            }
+        });
+    }
+
+    function sortGames(sortBy) {
+        $.ajax({
+            url: '@Url.Action("Sort", "Cart")',
+            type: 'POST',
+            data: { sortBy: sortBy },
+            success: function(data) {
+                $('#game-list').html(data);
+            }
+        });
+    }
+});
+</script>

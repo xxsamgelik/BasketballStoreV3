@@ -41,6 +41,13 @@ namespace GameStore.WebUI
                 new { controller = "Game", action = "List" },
                 new { page = @"\d+" }
             );
+            routes.MapRoute(
+                name: "Contact",
+                url: "Contact/Index",
+                defaults: new { controller = "Contact", action = "Index" }
+            );
+
+
 
             routes.MapRoute(null, "{controller}/{action}");
         }

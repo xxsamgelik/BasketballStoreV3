@@ -17,5 +17,8 @@ namespace GameStore.Domain.Abstract
         IEnumerable<Game> GetGames2(string searchName);
         IEnumerable<Game> GetGamesByPrice(decimal minPrice, decimal maxPrice);
 
+
+
+
     }
 }

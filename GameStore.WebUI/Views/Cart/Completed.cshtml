@@ -4,4 +4,58 @@
 
 <h2>Спасибо!</h2>
 <p>Спасибо за выбор нашего магазина. Заказ в кратчайшие сроки будет отправлен в службу доставки.</p>
-    
+<div class="progress-bar">
+	<div class="progress-bar-inner" id="progress-bar"></div>
+</div>
+<p id="progress-value">0%</p>
+<style>
+    .progress-bar {
+        width: 700px;
+        height: 20px;
+        background-color: #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .progress-bar-inner {
+        height: 100%;
+        background-color: #42a5f5;
+        width: 0%;
+        transition: width 0.5s ease-in-out;
+    }
+
+    #progress-value {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+</style>
+
+<script>
+    function updateProgressBar() {
+        var progressBar = document.getElementById('progress-bar');
+        var progressValue = document.getElementById('progress-value');
+
+        var randomTime = Math.floor(Math.random() * 15) + 1;
+        var progress = 0;
+
+        var interval = setInterval(function () {
+            progress += 100 / randomTime;
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                progress = 100;
+                progressValue.innerText = 'Заказ доставлен';
+            } else {
+                progressValue.innerText = Math.floor(progress) + '%';
+            }
+
+            progressBar.style.width = progress + '%';
+
+        }, 60000);
+    }
+
+    updateProgressBar();
+
+
+</script>
